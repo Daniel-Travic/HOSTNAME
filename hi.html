@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mi Portafolio</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome para íconos -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <style>
+        /* Reset y scroll suave */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(to right, #fdfbfb, #ebedee);
+            color: #333;
+        }
+
+        /* Menú de navegación */
+        nav {
+            position: sticky;
+            top: 0;
+            background-color: #222;
+            padding: 15px 0;
+            text-align: center;
+            z-index: 1000;
+        }
+        nav a {
+            color: #fff;
+            margin: 0 20px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        nav a:hover {
+            color: #ff9800;
+        }
+
+        /* Secciones */
+        section {
+            min-height: 100vh;
+            padding: 60px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease-out;
+        }
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h1, h2 {
+            margin-bottom: 20px;
+        }
+        h1 { font-size: 3rem; color: #222; }
+        h2 { font-size: 2rem; color: #444; }
+
+        p {
+            font-size: 1.2rem;
+            color: #555;
+            max-width: 600px;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        img {
+            width: 80%;
+            max-width: 400px;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        button {
+            background-color: #ff9800;
+            border: none;
+            padding: 12px 25px;
+            color: #fff;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover { background-color: #e68900; }
+
+        /* Formulario */
+        form {
+            max-width: 450px;
+            width: 100%;
+            background: #fff;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        input, textarea {
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+        textarea { resize: none; height: 120px; }
+
+        /* Footer */
+        footer {
+            background-color: #222;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+        footer a {
+            color: #ff9800;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px){
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.8rem; }
+            p { font-size: 1rem; }
+            nav a { margin: 0 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Menú -->
+    <nav>
+        <a href="#inicio"><i class="fas fa-home"></i> Inicio</a>
+        <a href="#sobre-mi"><i class="fas fa-user"></i> Sobre mí</a>
+        <a href="#contacto"><i class="fas fa-envelope"></i> Contacto</a>
+    </nav>
+
+    <!-- Sección Inicio -->
+    <section id="inicio">
+        <h1>¡Hola! Soy Daniel</h1>
+        <p id="mensaje">Bienvenido a mi portafolio web profesional.</p>
+        <img src="https://via.placeholder.com/400" alt="Imagen de ejemplo">
+        <button onclick="cambiarMensaje()">Haz clic aquí</button>
+    </section>
+
+    <!-- Sección Sobre mí -->
+    <section id="sobre-mi">
+        <h2>Sobre mí</h2>
+        <p>Soy un apasionado por la tecnología y el desarrollo web. Me encanta crear proyectos dinámicos y modernos que ofrezcan experiencias atractivas a los usuarios.</p>
+        <img src="https://via.placeholder.com/400" alt="Foto sobre mí">
+    </section>
+
+    <!-- Sección Contacto -->
+    <section id="contacto">
+        <h2>Contáctame</h2>
+        <form action="https://formspree.io/f/tu-codigo" method="POST">
+            <input type="text" name="name" placeholder="Tu nombre" required>
+            <input type="email" name="_replyto" placeholder="Tu correo" required>
+            <textarea name="message" placeholder="Escribe tu mensaje aquí" required></textarea>
+            <button type="submit">Enviar</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Daniel Rangel | Sígueme en
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+        </p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Cambiar mensaje
+        function cambiarMensaje() {
+            document.getElementById("mensaje").innerText = "¡Has hecho clic y el mensaje cambió!";
+        }
+
+        // Animaciones scroll
+        const secciones = document.querySelectorAll("section");
+        const mostrarSeccion = () => {
+            const triggerBottom = window.innerHeight / 5 * 4;
+            secciones.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                if(sectionTop < triggerBottom){
+                    section.classList.add("visible");
+                }
+            });
+        }
+        window.addEventListener("scroll", mostrarSeccion);
+        mostrarSeccion();
+    </script>
+
+</body>
+</html>
